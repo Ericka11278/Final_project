@@ -2,4 +2,5 @@
 #prompted to enter the time they want to rent "product" and then this will 
 #make their time run through and based on the time they have inputed, they will 
 # be given an amount they have to pay that correspoinds with said time.
-# Rental ideas as of now: car rentals, calculator rentas, beach umbrella rentals...etc
+# Rental ideas as of now: car rentals, calculator rentals, beach umbrella rentals
+# skateboard or roller skate rentals
