@@ -3,7 +3,7 @@
 #make their time run through and based on the time they have inputed, they will 
 # be given an amount they have to pay that correspoinds with said time.
 # Rental ideas as of now: car rentals, calculator rentas, beach umbrella rentals...etc
-
+# My idea is a laptop rental
 
 
 
