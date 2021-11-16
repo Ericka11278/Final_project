@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 def displayinventory():
   """This prompts the potential renter to choose how they would like the inventory
   presented to them.
-  Args:
-    prompt (str): questions the user how they would like the inventory displayed
-    to them
-    inventory (csv): 
+  
+  Side Effects:
+    - prints the csv file as a table
+    - prints a message if user inputs wrong value
   """
   while True:
     try:
