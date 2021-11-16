@@ -26,3 +26,4 @@ def displayinventory():
         print(inventory)
       else:
         print('Wrong input, try Graph or Table')
+displayinventory()
