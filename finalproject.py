@@ -305,6 +305,7 @@ class Customer:
    
     #BLEN'S CODE 
     def displayoption(self):
+        """This allows the customer to choose if they would like to see the inventory as a graph or a table"""
         prompt = input('How would you like inventory to be displayed? (Graph or Table)')
         inventory = pd.read_csv('inventory.csv')
         if prompt.lower() == 'graph':
