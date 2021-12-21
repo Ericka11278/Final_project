@@ -1,6 +1,8 @@
 #INST326 Team Project Lab Rental Shop
 from datetime import datetime
 import csv
+import pandas as pd
+import matplotlib.pyplot as plt
 
 class LabRental:
     
@@ -32,6 +34,7 @@ class LabRental:
         
         return (self.goggstock, self.labcoatstock, self.standcalcstock,
                 self.scientcalcstock, self.graphcalcstock)
+   
 
     def rentItemOnHourlyBasis(self, choice, n):
         """
@@ -293,8 +296,20 @@ class Customer:
         self.bill = 0
         self.name = input("What is your name?")
         self.phone = input("What is your phone number?")
-        
+   
+    #BLEN'S CODE 
+    def displayoption(self):
+        prompt = input('How would you like inventory to be displayed? (Graph or Table)')
+        inventory = pd.read_csv('inventory.csv')
+        if prompt.lower() == 'graph':
+            inventory.plot.bar(x='ITEM NAME', y='STOCK', rot='horizontal', figsize=(10, 10))
+        elif prompt.lower() == 'table':
+            return inventory
+        else:
+            return ('Wrong input, try Graph or Table')
 
+    
+    
     #JAY'S CODE
     def requestItem(self, choice):
         """
@@ -498,7 +513,8 @@ def main():
         9. Return Standard Calculators
         10. Return Scientific Calculators
         11. Return Graphing Calculators
-        12. Exit
+        12. Display available stock as a graph or a table
+        13. Exit
         """)
     
         choice = input("Enter choice: ")
@@ -569,6 +585,9 @@ def main():
         
                   
         elif choice == 12:
+            customer.displayoption
+       
+        elif choice == 13:
             break
         
         else:
