@@ -1,6 +1,6 @@
 #INST326 Team Project Lab Rental Shop
-
-import datetime
+from datetime import datetime
+import csv
 
 class LabRental:
     
@@ -148,30 +148,34 @@ class LabRental:
     
         
     #JOSEPHINE'S PART OF THE CODE   
-    def returnItem(self, choice, request):
-        """
-        1. Accept a rented item from a customer
-        2. Replenishes the inventory
-        """
+    def latefee(self, rentalPeriod, planhours):
+        rentalPeriod = rentalPeriod
+        planhours = planhours
+        planhours
+        if round(rentalPeriod.seconds / 3600) > planhours:
+            latehours = (round(rentalPeriod.seconds / 3600) - planhours)
+            return latehours * 2
+
+        
+    def returningItems(self, choice, request):
+        with open("inventory.csv", "r", encoding="utf-8") as f:
+            reader = csv.reader(f)
+            stock = {}
+            for item in reader: 
+                stock[item[0]] = {"stock": item[1], "price": item[2]}
+            print(stock)
         if choice == 7:
             rentalTime, numofgoggles, planhours = request
-            bill = 0
+            price = int(stock["Goggles"]["price"])
 
             if rentalTime and numofgoggles:
-                self.goggstock = self.goggstock + numofgoggles
-                now = datetime.datetime.now()
-                rentalPeriod = now - rentalTime
-        
-                # hourly bill calculation
-                
-                bill = round(rentalPeriod.seconds / 3600) * 9 * numofgoggles
+                now = datetime.now()
+                rentalPeriod = now - rentalTime              
+                bill = round(rentalPeriod.seconds / 3600) * price * numofgoggles
                 if round(rentalPeriod.seconds / 3600) > planhours:
-                    latehours = (round(rentalPeriod.seconds / 3600) - planhours)
-                    latefee = latehours * 2
-                    bill = bill + latefee
+                    bill = bill + self.latefee(rentalPeriod, planhours)
                     print("Thanks for returning your goggles.")
-                    print(f"You returned your goggles late so a late fee of \
-                        ${latefee} will be added to your bill.")
+                    print(f"You returned your goggles late so a late fee has been added to your bill.")
                     print(f"Your total bill is ${bill}.")
                     return bill
                 
@@ -180,27 +184,18 @@ class LabRental:
                     print(f"Your total bill is ${bill}.")
                     return bill
                 
-                
         elif choice == 8:
             rentalTime, numoflabcoats, planhours = request
-            bill = 0
-
+            
+            price = int(stock["Lab Coat"]["price"])
             if rentalTime and numoflabcoats:
-                self.labcoatstock = self.labcoatstock + numoflabcoats
-                now = datetime.datetime.now()
-                rentalPeriod = now - rentalTime
-        
-                # hourly bill calculation
-                
-                bill = round(rentalPeriod.seconds / 3600) * 25 * numoflabcoats
+                now = datetime.now()
+                rentalPeriod = now - rentalTime              
+                bill = round(rentalPeriod.seconds / 3600) * price * numoflabcoats
                 if round(rentalPeriod.seconds / 3600) > planhours:
-                    latehours = (round(rentalPeriod.seconds / 3600) - planhours)
-                    latefee = latehours * 10
-                    bill = bill + latefee
+                    bill = bill + self.latefee(rentalPeriod, planhours)
                     print("Thanks for returning your labcoats.")
-                    print(f"You returned your labcoats late so a late fee of \
-                        ${latefee} will be added to your bill.")
-                    print(f"Your total bill is ${bill}.")
+                    print(f"You returned your labcoats late so a late fee has been added to your bill. Your total bill is ${bill}.")
                     return bill
                 
                 else:
@@ -211,24 +206,16 @@ class LabRental:
                     
         elif choice == 9:
             rentalTime, numofstandcalcs, planhours = request
-            bill = 0
+            price = int(stock["Standard Calculator"]["price"])
 
             if rentalTime and numofstandcalcs:
-                self.standcalcstock = self.standcalcstock + numofstandcalcs
-                now = datetime.datetime.now()
-                rentalPeriod = now - rentalTime
-        
-                # hourly bill calculation
-                
-                bill = round(rentalPeriod.seconds / 3600) * 5 * numofstandcalcs
+                now = datetime.now()
+                rentalPeriod = now - rentalTime              
+                bill = round(rentalPeriod.seconds / 3600) * price * numofstandcalcs
                 if round(rentalPeriod.seconds / 3600) > planhours:
-                    latehours = (round(rentalPeriod.seconds / 3600) - planhours)
-                    latefee = latehours * 2
-                    bill = bill + latefee
+                    bill = bill + self.latefee(rentalPeriod, planhours)
                     print("Thanks for returning your standard calculators.")
-                    print(f"You returned your standard calculators late so a\
-                        late fee of ${latefee} will be added to your bill.")
-                    print(f"Your total bill is ${bill}.")
+                    print(f"You returned your standard calculators late so a late fee has been added to your bill. Your total bill is ${bill}.")
                     return bill
                 
                 else:
@@ -239,24 +226,16 @@ class LabRental:
                 
         elif choice == 10:
             rentalTime, numofscientcalcs, planhours = request
-            bill = 0
+            price = int(stock["Scientific Calculator"]["price"])
 
             if rentalTime and numofscientcalcs:
-                self.scientcalcstock = self.scientcalcstock + numofscientcalcs
-                now = datetime.datetime.now()
-                rentalPeriod = now - rentalTime
-        
-                # hourly bill calculation
-                
-                bill = round(rentalPeriod.seconds / 3600) * 7 * numofscientcalcs
+                now = datetime.now()
+                rentalPeriod = now - rentalTime              
+                bill = round(rentalPeriod.seconds / 3600) * price * numofscientcalcs
                 if round(rentalPeriod.seconds / 3600) > planhours:
-                    latehours = (round(rentalPeriod.seconds / 3600) - planhours)
-                    latefee = latehours * 3
-                    bill = bill + latefee
+                    bill = bill + self.latefee(rentalPeriod, planhours)
                     print("Thanks for returning your scientific calculators.")
-                    print(f"You returned your scientific calculators late so a\
-                        late fee of ${latefee} will be added to your bill.")
-                    print(f"Your total bill is ${bill}.")
+                    print(f"You returned your scientific calculators late so a late fee has been added to your bill. Your total bill is ${bill}.")
                     return bill
                 
                 else:
@@ -267,24 +246,16 @@ class LabRental:
             
         elif choice == 11:
             rentalTime, numofgraphcalcs, planhours = request
-            bill = 0
+            price = int(stock["Graphing Calculator"]["price"])
 
             if rentalTime and numofgraphcalcs:
-                self.graphcalcstock = self.graphcalcstock + numofgraphcalcs
-                now = datetime.datetime.now()
-                rentalPeriod = now - rentalTime
-        
-                # hourly bill calculation
-                
-                bill = round(rentalPeriod.seconds / 3600) * 10 * numofgraphcalcs
+                now = datetime.now()
+                rentalPeriod = now - rentalTime              
+                bill = round(rentalPeriod.seconds / 3600) * price * numofgraphcalcs
                 if round(rentalPeriod.seconds / 3600) > planhours:
-                    latehours = (round(rentalPeriod.seconds / 3600) - planhours)
-                    latefee = latehours * 4
-                    bill = bill + latefee
+                    bill = bill + self.latefee(rentalPeriod, planhours)
                     print("Thanks for returning your graphing calculators.")
-                    print(f"You returned your graphing calculators late so a\
-                        late fee of ${latefee} will be added to your bill.")
-                    print(f"Your total bill is ${bill}.")
+                    print(f"You returned your graphing calculators late so a late fee will be added to your bill. Your total bill is ${bill}.")
                     return bill
                 
                 else:
@@ -292,7 +263,7 @@ class LabRental:
                     print(f"Your total bill is ${bill}.")
                     return bill    
         else:
-            print("Are you sure you rented an item with us?")
+            print("Sorry, we do not have enough information to process your request.")
             return None
 
 
@@ -324,7 +295,7 @@ class Customer:
         self.phone = input("What is your phone number?")
         
 
-    
+    #JAY'S CODE
     def requestItem(self, choice):
         """
         Takes a request from the customer for the number of items to rent.
@@ -381,7 +352,7 @@ class Customer:
             numstandcalc = input("How many standard calculators would you like\
                 to rent?")
             standcalclanhours = input("How many hours do you plan to rent for?")
-            standcalcplanhours = int(standcalcplanhours)
+            standcalcplanhours = int(standcalclanhours)
             standcalcplancost = (standcalcplanhours)*5*numstandcalc
             print(f"Your estimated cost will be ${standcalcplancost}.")
             self.standcalcplannedhours = standcalcplanhours
@@ -452,7 +423,7 @@ class Customer:
                 return self.graphcalc
             
                               
-    #JOSEPHINE'S 'CODE'         
+    #JAY'S 'CODE'         
     def returnItem(self, choice):
         """
         Allows customers to return their items to the rental shop.
@@ -508,7 +479,7 @@ class Customer:
         
         
 
-
+#JAY'S CODE
 def main():
     shop = LabRental(45, 30, 25, 40, 16)
     customer = Customer()
