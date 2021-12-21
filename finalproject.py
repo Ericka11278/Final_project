@@ -268,6 +268,12 @@ class LabRental:
         else:
             print("Sorry, we do not have enough information to process your request.")
             return None
+       
+    def give_reciept(self):
+        """
+        Prints receipt for customer
+        """
+        print(f'Thank you for shopping at JEB Rentals, here is your bill : {bill}')
 
 
 
@@ -514,7 +520,8 @@ def main():
         10. Return Scientific Calculators
         11. Return Graphing Calculators
         12. Display available stock as a graph or a table
-        13. Exit
+        13. Print receipt
+        14. Exit
         """)
     
         choice = input("Enter choice: ")
@@ -586,12 +593,15 @@ def main():
                   
         elif choice == 12:
             customer.displayoption
-       
+        
         elif choice == 13:
+            shop.give_receipt
+        
+        elif choice == 14:
             break
         
         else:
-            print("Invalid input. Please enter number between 1-12 ")        
+            print("Invalid input. Please enter number between 1-14 ")        
     print("Thank you for using the lab rental system.")
 
 
