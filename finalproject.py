@@ -5,6 +5,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 class LabRental:
+    """
+    A class for all the normal required renting actions
+    """
     
     def __init__(self, goggstock=0, labcoatstock=0, standcalcstock=0,\
         scientcalcstock=0, graphcalcstock=0):
@@ -152,6 +155,7 @@ class LabRental:
         
     #JOSEPHINE'S PART OF THE CODE   
     def latefee(self, rentalPeriod, planhours):
+        """Determines if latefees are required, if so how much they are."""
         rentalPeriod = rentalPeriod
         planhours = planhours
         planhours
@@ -278,6 +282,7 @@ class LabRental:
 
 
 class Customer:
+    """A class for other actions required of the customer"""
 
     def __init__(self):
         """
