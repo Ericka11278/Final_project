@@ -7,12 +7,20 @@ import matplotlib.pyplot as plt
 class LabRental:
     """
     A class for all the normal required renting actions
+    
     """
     
     def __init__(self, goggstock=0, labcoatstock=0, standcalcstock=0,\
         scientcalcstock=0, graphcalcstock=0):
         """
         Our class that instantiates lab rental shop.
+        Args:
+        goggstock(int):amount of googles in stock
+        labcoatstock(int):amount of coats in stock
+        standcalcstock(int):amount of standard calculators  in stock
+        scientcalcstock(int):amount of scientific calculators in stock
+        graphcalcstock(int):amount of graphing calculators in stock
+        
         """
         self.goggstock = goggstock
         self.labcoatstock = labcoatstock
@@ -42,6 +50,9 @@ class LabRental:
     def rentItemOnHourlyBasis(self, choice, n):
         """
         Rents a lab item on hourly basis to a customer.
+        Args: 
+        choice(int):this is based on what the customer chooses. Each choice that the customer makes is set by a number 
+        n(int): this is the amount of things the customer requests
         """
         if choice == 2:
             
@@ -350,6 +361,8 @@ class Customer:
     def requestItem(self, choice):
         """
         Takes a request from the customer for the number of items to rent.
+        Args:
+        Choice(int):choice of the customer
         """
         
         if choice == 2:
@@ -478,6 +491,8 @@ class Customer:
     def returnItem(self, choice):
         """
         Allows customers to return their items to the rental shop.
+        Args:
+        Choice(int):choice of the customer
         """
         
         if choice == 7:
