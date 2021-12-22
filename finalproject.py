@@ -2,7 +2,7 @@
 from datetime import datetime
 import csv
 import pandas as pd
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 class LabRental:
     """
@@ -55,7 +55,7 @@ class LabRental:
                 return None
         
             else:
-                now = datetime.datetime.now()                      
+                now = datetime.now()                      
                 print(f"You have rented {n} goggles on hourly basis today at\
                     {now.hour} hours.")
                 print("You will be charged $9 for each hour per set of goggles.")
@@ -592,31 +592,31 @@ def main():
                
         
         elif choice == 7:
-            customer.bill = shop.returnItem(choice, customer.returnItem(choice))
+            customer.bill = shop.returningItems(choice, customer.returnItem(choice))
             customer.goggrentalTime, customer.goggles = 0, 0
             customer.goggplannedhours = 0
             
             
         elif choice == 8:
-            customer.bill = shop.returnItem(choice, customer.returnItem(choice))
+            customer.bill = shop.returningItems(choice, customer.returnItem(choice))
             customer.labcoatrentalTime, customer.labcoats = 0, 0
             customer.labcoatplannedhours = 0
             
         
         elif choice == 9:
-            customer.bill = shop.returnItem(choice, customer.returnItem(choice))
+            customer.bill = shop.returningItems(choice, customer.returnItem(choice))
             customer.standcalcrentalTime, customer.standcalc = 0, 0
             customer.standcalcplannedhours = 0
             
             
         elif choice == 10:
-            customer.bill = shop.returnItem(choice, customer.returnItem(choice))
+            customer.bill = shop.returningItems(choice, customer.returnItem(choice))
             customer.scientcalcrentalTime, customer.scientcalc = 0, 0
             customer.scientcalcplannedhours = 0
             
             
         elif choice == 11:
-            customer.bill = shop.returnItem(choice, customer.returnItem(choice))
+            customer.bill = shop.returningItems(choice, customer.returnItem(choice))
             customer.graphcalcrentalTime, customer.graphcalc = 0, 0
             customer.graphcalcplannedhours = 0
         
