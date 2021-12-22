@@ -272,7 +272,7 @@ class LabRental:
         else:
             print("Sorry, we do not have enough information to process your request.")
             return None
-       
+    #MORY'S CODE   
     def give_reciept(self):
         """
         Prints receipt for customer
