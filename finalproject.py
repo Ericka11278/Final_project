@@ -309,8 +309,8 @@ class LabRental:
     def give_reciept(self):
         """
         Prints receipt for customer
-        """
-        print(f'Thank you for shopping at JEB Rentals, here is your bill : {bill}')
+        """   
+        print(f'Thank you for shopping at JEB Rentals, here is your bill : {self.bill}')
 
 
 
