@@ -2,17 +2,25 @@
 from datetime import datetime
 import csv
 import pandas as pd
-#import matplotlib.pyplot as plt
+
 
 class LabRental:
     """
     A class for all the normal required renting actions
+    
     """
     
     def __init__(self, goggstock=0, labcoatstock=0, standcalcstock=0,\
         scientcalcstock=0, graphcalcstock=0):
         """
         Our class that instantiates lab rental shop.
+        Args:
+        goggstock(int):amount of googles in stock
+        labcoatstock(int):amount of coats in stock
+        standcalcstock(int):amount of standard calculators  in stock
+        scientcalcstock(int):amount of scientific calculators in stock
+        graphcalcstock(int):amount of graphing calculators in stock
+        
         """
         self.goggstock = goggstock
         self.labcoatstock = labcoatstock
@@ -20,7 +28,7 @@ class LabRental:
         self.scientcalcstock = scientcalcstock
         self.graphcalcstock = graphcalcstock
     
-    #ERICKA'S 'CODE'
+
     def displaystock(self):
         """
         Displays the lab items currently available for rent in the shop.
@@ -42,6 +50,9 @@ class LabRental:
     def rentItemOnHourlyBasis(self, choice, n):
         """
         Rents a lab item on hourly basis to a customer.
+        Args: 
+        choice(int):this is based on what the customer chooses. Each choice that the customer makes is set by a number 
+        n(int): this is the amount of things the customer requests
         """
         if choice == 2:
             
@@ -152,8 +163,7 @@ class LabRental:
                 return now 
      
     
-        
-    #JOSEPHINE'S PART OF THE CODE   
+           
     def latefee(self, rentalPeriod, planhours):
         """Determines if latefees are required, if so how much they are.
         Args:
@@ -295,8 +305,7 @@ class LabRental:
         else:
             print("Sorry, we do not have enough information to process your request.")
             return None
-     
-     #MORRY'S CODE  
+         
     def give_reciept(self):
         """
         Prints receipt for customer
@@ -332,7 +341,7 @@ class Customer:
         self.name = input("What is your name?")
         self.phone = input("What is your phone number?")
    
-    #BLEN'S CODE 
+     
     def displayoption(self):
         """This allows the customer to choose if they would like to see the inventory as a graph or a table"""
         prompt = input('How would you like inventory to be displayed? (Graph or Table)')
@@ -346,10 +355,12 @@ class Customer:
 
     
     
-    #JAY'S CODE
+    
     def requestItem(self, choice):
         """
         Takes a request from the customer for the number of items to rent.
+        Args:
+        Choice(int):choice of the customer
         """
         
         if choice == 2:
@@ -474,10 +485,12 @@ class Customer:
                 return self.graphcalc
             
                               
-    #JAY'S 'CODE'         
+             
     def returnItem(self, choice):
         """
         Allows customers to return their items to the rental shop.
+        Args:
+        Choice(int):choice of the customer
         """
         
         if choice == 7:
@@ -530,7 +543,6 @@ class Customer:
         
         
 
-#JAY'S CODE
 def main():
     shop = LabRental(45, 30, 25, 40, 16)
     customer = Customer()
