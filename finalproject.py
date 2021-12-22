@@ -155,7 +155,14 @@ class LabRental:
         
     #JOSEPHINE'S PART OF THE CODE   
     def latefee(self, rentalPeriod, planhours):
-        """Determines if latefees are required, if so how much they are."""
+        """
+        Determines if latefees are required, if so how much they are.
+        Args:
+            rentalPeriod(int): the rental period computed in returtingItems methods 
+            planhours(int): the number of hours the user planned on renting out the item for
+        Returns: 
+            latehours(int): latefee based on how late the item was returned times two
+            """
         rentalPeriod = rentalPeriod
         planhours = planhours
         planhours
@@ -165,6 +172,23 @@ class LabRental:
 
         
     def returningItems(self, choice, request):
+        """
+        Uses the inventory to determine the price of items to be rented out and computes the user's bill. 
+        Args: 
+            choice(int): the choice chosen by the user 
+            request(tuple): a tuple of the user's request, such as their rental time, how many items they're renting out 
+            and how long they plan to rent out the item for
+        Returns: 
+            bill(int): the user's bill based on their request 
+        Outside code assistance:
+            importing datetime: https://www.programiz.com/python-programming/datetime/current-datetime
+            I used this source to determine how long an item was rented out for based on when it is being returend (now) 
+            vs when it was rented out and how long it was orriginally planned to be rented out for. 
+            importing csv: https://www.youtube.com/watch?v=q5uM4VKywbA&t=462s
+            I used this source to get  better understanding of reading a csv file and getting certain parts of a csv file 
+            to work within different parts of my code. 
+        
+        """
         with open("inventory.csv", "r", encoding="utf-8") as f:
             reader = csv.reader(f)
             stock = {}
