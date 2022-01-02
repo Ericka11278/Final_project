@@ -2,14 +2,25 @@
 from datetime import datetime
 import csv
 import pandas as pd
-import matplotlib.pyplot as plt
+
 
 class LabRental:
+    """
+    A class for all the normal required renting actions
+    
+    """
     
     def __init__(self, goggstock=0, labcoatstock=0, standcalcstock=0,\
         scientcalcstock=0, graphcalcstock=0):
         """
         Our class that instantiates lab rental shop.
+        Args:
+        goggstock(int):amount of googles in stock
+        labcoatstock(int):amount of coats in stock
+        standcalcstock(int):amount of standard calculators  in stock
+        scientcalcstock(int):amount of scientific calculators in stock
+        graphcalcstock(int):amount of graphing calculators in stock
+        
         """
         self.goggstock = goggstock
         self.labcoatstock = labcoatstock
@@ -17,7 +28,7 @@ class LabRental:
         self.scientcalcstock = scientcalcstock
         self.graphcalcstock = graphcalcstock
     
-    #ERICKA'S 'CODE'
+
     def displaystock(self):
         """
         Displays the lab items currently available for rent in the shop.
@@ -39,6 +50,9 @@ class LabRental:
     def rentItemOnHourlyBasis(self, choice, n):
         """
         Rents a lab item on hourly basis to a customer.
+        Args: 
+        choice(int):this is based on what the customer chooses. Each choice that the customer makes is set by a number 
+        n(int): this is the amount of things the customer requests
         """
         if choice == 2:
             
@@ -52,7 +66,7 @@ class LabRental:
                 return None
         
             else:
-                now = datetime.datetime.now()                      
+                now = datetime.now()                      
                 print(f"You have rented {n} goggles on hourly basis today at\
                     {now.hour} hours.")
                 print("You will be charged $9 for each hour per set of goggles.")
@@ -149,9 +163,15 @@ class LabRental:
                 return now 
      
     
-        
-    #JOSEPHINE'S PART OF THE CODE   
+           
     def latefee(self, rentalPeriod, planhours):
+        """Determines if latefees are required, if so how much they are.
+        Args:
+            rentalPeriod(int): the rental period computed in returtingItems methods 
+            planhours(int): the number of hours the user planned on renting out the item for
+        Returns: 
+            latehours(int): latefee based on how late the item was returned times two
+            """
         rentalPeriod = rentalPeriod
         planhours = planhours
         planhours
@@ -161,6 +181,23 @@ class LabRental:
 
         
     def returningItems(self, choice, request):
+        """
+        Uses the inventory to determine the price of items to be rented out and computes the user's bill. 
+        Args: 
+            choice(int): the choice chosen by the user 
+            request(tuple): a tuple of the user's request, such as their rental time, how many items they're renting out 
+            and how long they plan to rent out the item for
+        Returns: 
+            bill(int): the user's bill based on their request 
+        Outside code assistance:
+            importing datetime: https://www.programiz.com/python-programming/datetime/current-datetime
+            I used this source to determine how long an item was rented out for based on when it is being returend (now) 
+            vs when it was rented out and how long it was orriginally planned to be rented out for. 
+            importing csv: https://www.youtube.com/watch?v=q5uM4VKywbA&t=462s
+            I used this source to get  better understanding of reading a csv file and getting certain parts of a csv file 
+            to work within different parts of my code. 
+        
+        """
         with open("inventory.csv", "r", encoding="utf-8") as f:
             reader = csv.reader(f)
             stock = {}
@@ -268,10 +305,17 @@ class LabRental:
         else:
             print("Sorry, we do not have enough information to process your request.")
             return None
+         
+    def give_reciept(self):
+        """
+        Prints receipt for customer
+        """   
+        print(f'Thank you for shopping at JEB Rentals, here is your bill : {self.bill}')
 
 
 
 class Customer:
+    """A class for other actions required of the customer"""
 
     def __init__(self):
         """
@@ -297,8 +341,9 @@ class Customer:
         self.name = input("What is your name?")
         self.phone = input("What is your phone number?")
    
-    #BLEN'S CODE 
+     
     def displayoption(self):
+        """This allows the customer to choose if they would like to see the inventory as a graph or a table"""
         prompt = input('How would you like inventory to be displayed? (Graph or Table)')
         inventory = pd.read_csv('inventory.csv')
         if prompt.lower() == 'graph':
@@ -310,10 +355,12 @@ class Customer:
 
     
     
-    #JAY'S CODE
+    
     def requestItem(self, choice):
         """
         Takes a request from the customer for the number of items to rent.
+        Args:
+        Choice(int):choice of the customer
         """
         
         if choice == 2:
@@ -438,10 +485,12 @@ class Customer:
                 return self.graphcalc
             
                               
-    #JAY'S 'CODE'         
+             
     def returnItem(self, choice):
         """
         Allows customers to return their items to the rental shop.
+        Args:
+        Choice(int):choice of the customer
         """
         
         if choice == 7:
@@ -494,7 +543,6 @@ class Customer:
         
         
 
-#JAY'S CODE
 def main():
     shop = LabRental(45, 30, 25, 40, 16)
     customer = Customer()
@@ -514,7 +562,8 @@ def main():
         10. Return Scientific Calculators
         11. Return Graphing Calculators
         12. Display available stock as a graph or a table
-        13. Exit
+        13. Print receipt
+        14. Exit
         """)
     
         choice = input("Enter choice: ")
@@ -555,43 +604,46 @@ def main():
                
         
         elif choice == 7:
-            customer.bill = shop.returnItem(choice, customer.returnItem(choice))
+            customer.bill = shop.returningItems(choice, customer.returnItem(choice))
             customer.goggrentalTime, customer.goggles = 0, 0
             customer.goggplannedhours = 0
             
             
         elif choice == 8:
-            customer.bill = shop.returnItem(choice, customer.returnItem(choice))
+            customer.bill = shop.returningItems(choice, customer.returnItem(choice))
             customer.labcoatrentalTime, customer.labcoats = 0, 0
             customer.labcoatplannedhours = 0
             
         
         elif choice == 9:
-            customer.bill = shop.returnItem(choice, customer.returnItem(choice))
+            customer.bill = shop.returningItems(choice, customer.returnItem(choice))
             customer.standcalcrentalTime, customer.standcalc = 0, 0
             customer.standcalcplannedhours = 0
             
             
         elif choice == 10:
-            customer.bill = shop.returnItem(choice, customer.returnItem(choice))
+            customer.bill = shop.returningItems(choice, customer.returnItem(choice))
             customer.scientcalcrentalTime, customer.scientcalc = 0, 0
             customer.scientcalcplannedhours = 0
             
             
         elif choice == 11:
-            customer.bill = shop.returnItem(choice, customer.returnItem(choice))
+            customer.bill = shop.returningItems(choice, customer.returnItem(choice))
             customer.graphcalcrentalTime, customer.graphcalc = 0, 0
             customer.graphcalcplannedhours = 0
         
                   
         elif choice == 12:
             customer.displayoption
-       
+        
         elif choice == 13:
+            shop.give_receipt
+        
+        elif choice == 14:
             break
         
         else:
-            print("Invalid input. Please enter number between 1-12 ")        
+            print("Invalid input. Please enter number between 1-14 ")        
     print("Thank you for using the lab rental system.")
 
 
